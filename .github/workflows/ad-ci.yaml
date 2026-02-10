@@ -11,6 +11,27 @@ permissions:
   contents: write
 
 jobs:
+  local-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: install java-jdk-21
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+      
+      - name: Build image locally
+        run: |
+          mkdir -p src/ad/proto
+          cp pb/demo.proto src/ad/proto/demo.proto
+          ./gradlew installDist
+          export AD_PORT=8080
+          export FEATURE_FLAG_GRPC_SERVICE_ADDR=featureflagservice:50053
+          ./build/install/opentelemetry-demo-ad/bin/Ad
+
   docker-build:
     runs-on: ubuntu-latest
     steps:
