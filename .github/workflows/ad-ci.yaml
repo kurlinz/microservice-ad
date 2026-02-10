@@ -31,7 +31,7 @@ jobs:
           ./gradlew installDist -PprotoSourceDir=./proto
           export AD_PORT=8080
           export FEATURE_FLAG_GRPC_SERVICE_ADDR=featureflagservice:50053
-          ./build/install/opentelemetry-demo-ad/bin/Ad
+         # ./build/install/opentelemetry-demo-ad/bin/Ad
 
   # docker-build:
   #   runs-on: ubuntu-latest
