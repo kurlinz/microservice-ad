@@ -1,4 +1,4 @@
-# CI for Product Catalog Service
+# CI for Ad Service
 
 name: ad-ci
 
@@ -27,6 +27,7 @@ jobs:
         run: |
           mkdir -p src/ad/proto
           cp pb/demo.proto src/ad/proto/demo.proto
+          chmod +x ./gradlew
           ./gradlew installDist
           export AD_PORT=8080
           export FEATURE_FLAG_GRPC_SERVICE_ADDR=featureflagservice:50053
